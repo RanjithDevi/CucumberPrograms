@@ -30,7 +30,7 @@ import cucumber.api.java.en.When;
 public class Implementation {
 	public static ChromeDriver driver;
 	 
-	 JavascriptExecutor js =  (JavascriptExecutor) driver;	
+	 
 
 	@Given("Launch https://www.carwale.com")
 	public void launch_https_www_carwale_com() 
@@ -51,7 +51,7 @@ public class Implementation {
 		 driver.get("https://www.carwale.com/");
 	//Implicitly wait for 5 milliseconds
 		 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	//	 JavascriptExecutor js =  (JavascriptExecutor) driver;	
+	 
 	}
 
 	@And("Click on Used")
@@ -148,7 +148,7 @@ public class Implementation {
 		 System.out.println("Both the displayed list and sorted list of kms are different");
 		 String name;
 		 WebElement carlowkm= driver.findElementByXPath("(//span[@class='image-container__gallery-icon slideShow']/following-sibling::span)[1]");
-		 js.executeScript("arguments[0].click()", carlowkm);
+		 driver.executeScript("arguments[0].click()", carlowkm);
 		 
 		 for (int i=1;i<2;i++)
 		 {
@@ -159,16 +159,16 @@ public class Implementation {
 			// WebElement carlowkm= driver.findElementByXPath("(//span[@class='image-container__gallery-icon slideShow']/following-sibling::span)[" +i+ "]");
 			// js.executeScript("arguments[0].click()", carlowkm);
 			 Thread.sleep(2000);
-			 js.executeScript("window.scrollBy((724, 10))");
+			// driver.executeScript("window.scrollBy((724, 10))");
 			
 			 Thread.sleep(2000);
 			
 		 }
 		 WebElement wishList = driver.findElementByXPath("//li[@data-action='ShortList&CompareWindow_Click']");
-		 js.executeScript("arguments[0].click()", wishList);
+		 driver.executeScript("arguments[0].click()", wishList);
 			
-		 WebElement moreDetails = driver.findElementByXPath("//a[text()='More details �']");
-		 js.executeScript("arguments[0].click()", moreDetails);
+		 WebElement moreDetails = driver.findElementByXPath("//a[contains(text(),'More details')]");
+		 driver.executeScript("arguments[0].click()", moreDetails);
 		 
 		 Thread.sleep(3000);
 		 
@@ -191,52 +191,6 @@ public class Implementation {
 	 
 		 
 	}
-/*	@And("Add the least KM ran car to Wishlist")
-	public void add_the_least_KM_ran_car_to_Wishlist() throws InterruptedException {
-		 WebElement moreDetails = driver.findElementByXPath("//a[text()='More details �']");
-		 js.executeScript("arguments[0].click()", moreDetails);
-		 
-		 Thread.sleep(3000);
-	}
-		
-		/* driver.findElementByXPath("//li[@class='action-box shortlistBtn']").click();;
-		 Thread.sleep(2000);
-		 driver.findElementByXPath("//a[text()='More details »']").click();;
-		 Thread.sleep(3000);
-		 
-	}
-
-	@And("Go to Wishlist and Click on More Details")
-	public void go_to_Wishlist_and_Click_on_More_Details() throws InterruptedException {
-
-		  driver.findElementByXPath("//li[@data-action='ShortList&CompareWindow_Click']").click();;
-		 //js.executeScript("arguments[0].click()", wishList);
-			
-		 driver.findElementByXPath("//a[text()='More details �']").click();;
-		// js.executeScript("arguments[0].click()", moreDetails);
-		 
-		 Thread.sleep(3000);
-		 Set<String> winSet = driver.getWindowHandles();
-		 List<String> winLis=new ArrayList<String>(winSet);
-		 driver.switchTo().window(winLis.get(1));
-	}
-
-	@Then("Print all the details under Overview in the Same way as displayed in application")
-	public void print_all_the_details_under_Overview_in_the_Same_way_as_displayed_in_application()
-	{
-		 Map<String,String> map = new LinkedHashMap<String, String>();
-		 List<WebElement> overview =driver.findElementsByXPath("//div[@class='overview-list padding-bottom10']//div[@class='equal-width text-light-grey']");
-		 List<WebElement> price =driver.findElementsByXPath("//div[@class='overview-list padding-bottom10']//div[@class='equal-width dark-text']");
-		 for (int i=0;i<overview.size();i++)
-		 {
-							 
-			 map.put(overview.get(i).getText(), price.get(i).getText());
-		 }
-		 for (Entry<String, String> each : map.entrySet()) {
-				System.out.println(each.getKey() + " ---------- " + each.getValue());
-			
-		 }
-	}*/
 	    
 	@And("Close the browser")
 	public void close_the_browser() 
